@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+  <style>
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+      position: absolute;
+      transform: translateX(150px);
+    }
+
+    .v-enter-active,
+    .v-leave-active {
+      transition: all .6s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <a href="" @click.prevent="comName='login'">登录组件</a>
+    <a href="" @click.prevent="comName='register'">注册组件</a>
+    <a href="" @click.prevent="comName='sss'">其他组件</a>
+
+    <transition model='out-in'>
+      <component :is='comName'></component>
+    </transition>
+  </div>
+  
+  <template id="tpl">
+    <div>
+      <p v-for='item in list'>
+        {{item.id}}----{{item.name}}
+      </p>
+    </div>
+  </template>
+  <!-- <template id="tpl2">
+      <div>
+        <p v-for='item in list'>
+          {{item.id}}----{{item.name}}
+        </p>
+      </div>
+  </template>
+  <template id="tpl3">
+      <div>
+        <p v-for='item in list'>
+          {{item.id}}----{{item.name}}
+        </p>
+      </div>
+  </template> -->
+  
+  <script>
+    function Component(myCom, data) {
+      return Vue.component(myCom, {
+        template: '#tpl',
+        data: () => ({
+          list: data
+        })
+      })
+    }
+    const logins = [{
+        id: 1,
+        name: '张三'
+      },
+      {
+        id: 2,
+        name: '李四'
+      },
+    ]
+    Component('login', logins)
+    const registers = [{
+        id: 1,
+        name: 'adfasd'
+      },
+      {
+        id: 2,
+        name: 'dfadfasd'
+      },
+    ]
+    Component('register', registers)
+    const ssss = [{
+        id: 1,
+        name: '23242343'
+      },
+      {
+        id: 2,
+        name: '3432432432'
+      },
+    ]
+    Component('sss', ssss)
+    // Vue.component('login', {
+    //   template: '#tpl',
+    //   data: () => ({
+    //     list: [{
+    //         id: 1,
+    //         name: '张三'
+    //       },
+    //       {
+    //         id: 2,
+    //         name: '李四'
+    //       },
+    //     ]
+    //   })
+    // })
+    // Vue.component('register', {
+    //   template: '#tpl',
+    //   data: () => ({
+    //     list: [{
+    //         id: 1,
+    //         name: 'wag'
+    //       },
+    //       {
+    //         id: 2,
+    //         name: 'dafdf'
+    //       },
+    //     ]
+    //   })
+    // })
+    // Vue.component('sss', {
+    //   template: '#tpl',
+    //   data: () => ({
+    //     list: [{
+    //         id: 1,
+    //         name: '王五'
+    //       },
+    //       {
+    //         id: 2,
+    //         name: '赵六'
+    //       },
+    //     ]
+    //   })
+    // })
+
+    new Vue({
+      el: '#app',
+      data: {
+        comName: 'login'
+      }
+    })
+  </script>
+</body>
+
+</html>
